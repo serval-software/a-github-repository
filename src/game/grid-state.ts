@@ -1,3 +1,3 @@
 export enum GridState {
-    Water, Boat
+    Water, Boat, Hit
 }
