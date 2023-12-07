@@ -1,9 +1,12 @@
 import { GridState } from './GridState';
+import { Boat } from './boat';
+import { Coordinates } from './coordinates';
 
 const GRID_SIZE = 10; 
 
 export class Grid {
     matrix!: Array<Array<GridState>>
+    hitMap: Array<[coordinates: Coordinates, boatId: number]> = [];
 
     constructor() {
         this.matrix = new Array(GRID_SIZE)
