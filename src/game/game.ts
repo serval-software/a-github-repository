@@ -11,6 +11,7 @@ export class Game {
         this.players = players;
         this.grids = players.map(() => new Grid());
         this.currentPlayer = Math.floor(Math.random() * players.length);
+        console.log(this.currentPlayer)
     }
 
     initBoat(currentPlayer: number, currentBoat: number, coordinates: Array<Coordinates>): boolean {
