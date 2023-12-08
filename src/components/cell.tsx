@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Typography } from "@mui/material";
 import { GridState } from "../game/grid-state.ts";
 
-export const Cell = ({ cellType, onClick, mouseOver, borderColor }) => {
+export const Cell = ({ cellType, onClick, mouseOver, borderColor = 'black' }) => {
   const setBackGroundColor = () => {
     switch (cellType) {
       case GridState.Boat:
@@ -35,7 +35,8 @@ export const Cell = ({ cellType, onClick, mouseOver, borderColor }) => {
             borderColor: borderColor,
           }}
         >
-          <Typography> {GridState[cellType][0] ?? cellType[0]} </Typography>
+          <Typography> {GridState[cellType] ?
+            GridState[cellType][0] : cellType[0]} </Typography>
         </div>
       </Grid>
     </Grid>

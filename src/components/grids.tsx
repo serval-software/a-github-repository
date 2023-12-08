@@ -3,7 +3,14 @@ import React from "react";
 import { GridComponent } from "../components/grid-component.tsx";
 
 export const GridCoupleDisplay = (props) => {
-  const { currentGrid, currentVisible, ennemyGrid, ennemyVisible } = props;
+  const {
+    currentGrid,
+    currentVisible,
+    ennemyGrid,
+    ennemyVisible,
+    currentPlayerName,
+    otherPlayerName,
+  } = props;
 
   return (
     <Grid
@@ -22,13 +29,14 @@ export const GridCoupleDisplay = (props) => {
         >
           <Grid item>
             <Typography variant="h4" component="div" gutterBottom>
-              My Grid
+              Defend your territory {currentPlayerName}!
             </Typography>
           </Grid>
           <Grid item>
             <GridComponent
               grid={currentGrid}
               isVisibleMatrix={currentVisible}
+              ennemy={false}
             />
           </Grid>
         </Grid>
@@ -42,11 +50,15 @@ export const GridCoupleDisplay = (props) => {
         >
           <Grid item>
             <Typography variant="h4" component="div" gutterBottom>
-              Ennemy Grid
+              Strike down the enemy {otherPlayerName}!
             </Typography>
           </Grid>
           <Grid item>
-            <GridComponent grid={ennemyGrid} isVisibleMatrix={ennemyVisible} />
+            <GridComponent
+              grid={ennemyGrid}
+              isVisibleMatrix={ennemyVisible}
+              ennemy={true}
+            />
           </Grid>
         </Grid>
       </Grid>

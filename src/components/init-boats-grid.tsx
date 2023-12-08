@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Grid, Typography, Button } from "@mui/material";
+import { Grid, Typography, Button, Dialog, DialogTitle, DialogContent } from "@mui/material";
 
 import { Game } from "../game/game.ts";
 import { GridState } from "../game/grid-state.ts";
@@ -23,6 +23,7 @@ export const InitBoatsGrid = (game: Game) => {
   const columns = range(0, grid.matrix[0].length);
   const [currentBoat, setCurrentBoat] = React.useState<number>(0);
   const [previewBoat, setPreviewBoat] = React.useState<Array<Coordinates>>([]);
+  const [open, setOpen] = React.useState(true);
 
   useEffect(() => {}, [direction]);
 
@@ -121,6 +122,12 @@ export const InitBoatsGrid = (game: Game) => {
           </Grid>
         </Grid>
       </Grid>
+      
+      <Dialog open={open} onClose={() => null} fullScreen>
+        <DialogTitle>Place your boat {game.players[game.currentPlayer]}</DialogTitle>
+        <DialogContent>Be carreful, this is {game.players[game.currentPlayer]} turn!! </DialogContent>
+        <Button variant="contained" color="success" onClick={() => setOpen(false)}>Let's do this!</Button>
+      </Dialog>
     </Grid>
   );
 };
