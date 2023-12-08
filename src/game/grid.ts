@@ -2,7 +2,7 @@ import { GridState } from "./grid-state.ts";
 import { Coordinates } from "./coordinates.ts";
 import { HitState } from "./hit-state.ts";
 
-const GRID_SIZE = 10;
+export const GRID_SIZE = 10;
 
 export class Grid {
   matrix!: Array<Array<GridState>>;

@@ -1,18 +1,16 @@
 import React from "react";
 import {
   Button,
-  Card,
   Dialog,
   DialogTitle,
   Grid,
   TextField,
   Typography,
 } from "@mui/material";
-import { Container } from "@mui/system";
 import GamesIcon from "@mui/icons-material/Games";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import CheckIcon from '@mui/icons-material/Check';
-import RowingIcon from '@mui/icons-material/Rowing';
+import CheckIcon from "@mui/icons-material/Check";
+import RowingIcon from "@mui/icons-material/Rowing";
 import { useNavigate } from "react-router-dom";
 
 export const PlayersPage = () => {
@@ -64,88 +62,86 @@ export const PlayersPage = () => {
   };
 
   return (
-    <Container>
-      <Card style={{ backgroundColor: "#f5f7fd", height: "100vh" }}>
-        <Grid
-          container
-          direction="column"
-          justifyContent="space-between"
-          alignItems="center"
-          style={{ height: 'inherit' }}
-        >
-          <Grid item>
-            <Grid
-              container
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Typography variant="h2">Welcome to BattleShip war!</Typography>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid
-              container
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                onClick={() => setShowPopup(true)}
-              >
-                Start! &nbsp;
-                <GamesIcon />
-              </Button>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <RowingIcon style={{ fontSize: '500%' }} color="primary" />
+    <>
+      <Grid
+        container
+        direction="column"
+        justifyContent="space-between"
+        alignItems="center"
+        style={{ height: "inherit" }}
+      >
+        <Grid item>
+          <Grid
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Typography variant="h2">Welcome to BattleShip war!</Typography>
           </Grid>
         </Grid>
-      </Card>
+        <Grid item>
+          <Grid
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={() => setShowPopup(true)}
+            >
+              Start! &nbsp;
+              <GamesIcon />
+            </Button>
+          </Grid>
+        </Grid>
+        <Grid item>
+          <RowingIcon style={{ fontSize: "500%" }} color="primary" />
+        </Grid>
+      </Grid>
 
       <Dialog open={showPopup} onClose={() => setShowPopup(false)}>
         <Grid container direction="column" spacing={2}>
-            <Grid item>
-                <DialogTitle>Enter players pseudos :</DialogTitle>
-            </Grid>
-            <Grid item>
-            <Grid
-          container
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          spacing={4}
-        >
-          <Grid item>{displayPseudoInput()}</Grid>
           <Grid item>
-            {currentPlayer === 2 ? (
-              <Button
-                variant="contained"
-                color="success"
-                onClick={() => startGame()}
-                disabled={player2 === "" || player2 === player1}
-              >
-                <CheckIcon />
-              </Button>
-            ) : (
-              <Button
-                variant="contained"
-                color="secondary"
-                disabled={player1 === ""}
-                onClick={() => setCurrentPlayer(2)}
-              >
-                <KeyboardDoubleArrowRightIcon />
-              </Button>
-            )}
+            <DialogTitle>Enter players pseudos :</DialogTitle>
+          </Grid>
+          <Grid item>
+            <Grid
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+              spacing={4}
+            >
+              <Grid item>{displayPseudoInput()}</Grid>
+              <Grid item>
+                {currentPlayer === 2 ? (
+                  <Button
+                    variant="contained"
+                    color="success"
+                    disabled={player2 === "" || player2 === player1}
+                    onClick={() => startGame()}
+                  >
+                    <CheckIcon />
+                  </Button>
+                ) : (
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    disabled={player1 === ""}
+                    onClick={() => setCurrentPlayer(2)}
+                  >
+                    <KeyboardDoubleArrowRightIcon />
+                  </Button>
+                )}
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
-            </Grid>
-        </Grid>
       </Dialog>
-    </Container>
+    </>
   );
 };
