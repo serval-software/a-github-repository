@@ -21,7 +21,7 @@ export const GridComponent = (props) => {
             {rows.map((column) => (
                 <Grid item key={column} >
                     {columns.map((row) => (
-                        <Cell key={`${row} ${column}`} cellType={displayMatrix(row, column)}></Cell>
+                        <Cell key={`${row} ${column}`} cellType={displayMatrix(row, column)} onClick={null}></Cell>
                         // <div  key={`${row} ${column}`} style={{
                         //     border: '1px solid #000',
                         //     // height: '100%', // Make each item a square by setting the height and width to the same value

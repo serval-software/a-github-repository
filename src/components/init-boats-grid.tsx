@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid } from '@mui/material';
 
 
 import { Game } from '../game/game.ts';
 import { GridState } from '../game/grid-state.ts';
-import { isValidCoordonates } from '../game/grid.ts';
+import { Grid as GridGame, isValidCoordonates } from '../game/grid.ts';
 import { Coordinates } from '../game/coordinates.ts';
+import { Cell } from './cell.tsx';
+import { computeStyles } from '@popperjs/core/index';
 
 // TODO: refactor: exist in another file
 const range = (start: number, end: number): Array<number> => {
@@ -13,7 +15,8 @@ const range = (start: number, end: number): Array<number> => {
 }
 
 export const InitBoatsGrid = (game: Game) => {
-    const grid = game.grids[game.currentPlayer];
+    const [grid, setGrid] = React.useState<GridGame>(game.grids[game.currentPlayer]);
+    // const grid = game.grids[game.currentPlayer];
     const rows = range(0, grid.matrix.length);
     const columns = range(0, grid.matrix[0].length);
     const [currentBoat, setCurrentBoat] = React.useState<number>(0);
@@ -34,9 +37,10 @@ export const InitBoatsGrid = (game: Game) => {
         if (areBoatsCoordinatesValid) {
             boatsCoordinates.forEach((coord) => {
                 grid.matrix[coord.row][coord.col] = GridState.Boat;
+                setGrid(grid)
             });
             setCurrentBoat(currentBoat + 1);
-            console.log('boat is valid');
+            console.log('boat is valid', grid.matrix);
         } else {
             console.log('boat is not valid');
         }
@@ -47,19 +51,21 @@ export const InitBoatsGrid = (game: Game) => {
             {rows.map((column) => (
                 <Grid item key={column} >
                     {columns.map((row) => (
-                        <div  key={`${row} ${column}`} onClick={() => onClickFunc(row, column)}style={{
-                            border: '1px solid #000',
-                            // height: '100%', // Make each item a square by setting the height and width to the same value
-                            // width: '100%',
-                            //
-                            width: '50px',
-                            height: '50px',
-                            backgroundColor: 'lightblue', // Set the background color
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}>
-                        </div>
+                        <Cell key={`${row} ${column}`} cellType={grid.matrix[row][column]} onClick={() => onClickFunc(row, column)}></Cell>
+
+                        // <div  key={`${row} ${column}`} onClick={() => onClickFunc(row, column)}style={{
+                        //     border: '1px solid #000',
+                        //     // height: '100%', // Make each item a square by setting the height and width to the same value
+                        //     // width: '100%',
+                        //     //
+                        //     width: '50px',
+                        //     height: '50px',
+                        //     backgroundColor: 'lightblue', // Set the background color
+                        //     display: 'flex',
+                        //     justifyContent: 'center',
+                        //     alignItems: 'center',
+                        // }}>
+                        // </div>
                     ))}
                 </Grid>
             ))}

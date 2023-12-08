@@ -11,11 +11,14 @@ export const GamePage = () => {
     const game = new Game([player1, player2]);
 
     return (
-        GridCoupleDisplay({
-            currentGrid: game.grids[0],
-            currentVisible: initVisibleGrid(Array.from({ length: GRID_SIZE * GRID_SIZE}, (_, idx) => new Coordinates(idx % GRID_SIZE, Math.floor(idx / GRID_SIZE)))),
-            ennemyGrid: game.grids[1],
-            ennemyVisible: initVisibleGrid(Array.from(game.grids[1].hitMap.keys())),
-        })
-    );
+        InitBoatsGrid(game)
+    )
+    // return(
+    //  GridCoupleDisplay({
+    //     currentGrid: game.grids[0],
+    //     currentVisible: initVisibleGrid(Array.from({ length: GRID_SIZE * GRID_SIZE}, (_, idx) => new Coordinates(idx % GRID_SIZE, Math.floor(idx / GRID_SIZE)))),
+    //     ennemyGrid: game.grids[1],
+    //     ennemyVisible: initVisibleGrid(Array.from(game.grids[1].hitMap.keys())),
+    // })
+    // );
 }
