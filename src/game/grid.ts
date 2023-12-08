@@ -1,6 +1,6 @@
-import { GridState } from "./grid-state";
-import { Coordinates } from "./coordinates";
-import { HitState } from "./hit-state";
+import { GridState } from "./grid-state.ts";
+import { Coordinates } from "./coordinates.ts";
+import { HitState } from "./hit-state.ts";
 
 const GRID_SIZE = 10;
 
@@ -11,8 +11,8 @@ export class Grid {
   hitCells!: Array<Coordinates>;
 
   constructor() {
-    this.matrix = new Array(GRID_SIZE).fill(
-      new Array(GRID_SIZE).fill(GridState.Water)
+    this.matrix = Array.from({length: GRID_SIZE}, () => 
+      Array.from({ length: GRID_SIZE}, () => GridState.Water)
     );
     this.hitMap = new Map();
     this.boatSizes = new Array();
