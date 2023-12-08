@@ -12,7 +12,8 @@ const range = (start: number, end: number): Array<number> => {
   return Array.from({ length: end - start }, (_, index) => start + index);
 };
 
-export const InitBoatsGrid = (game: Game) => {
+export const InitBoatsGrid = (props) => {
+  const { game, boardsAreInitialized, setBoardsAreInitialized } = props;
   const [grid, setGrid] = React.useState<GridGame>(
     game.grids[game.currentPlayer]
   );
@@ -23,7 +24,7 @@ export const InitBoatsGrid = (game: Game) => {
   const columns = range(0, grid.matrix[0].length);
   const [currentBoat, setCurrentBoat] = React.useState<number>(0);
   const [previewBoat, setPreviewBoat] = React.useState<Array<Coordinates>>([]);
-  const [open, setOpen] = React.useState(true);
+  const [playerFinished, setPlayerFinished] = React.useState<number>(-1);
 
   useEffect(() => {}, [direction]);
 
@@ -56,10 +57,18 @@ export const InitBoatsGrid = (game: Game) => {
       });
       setCurrentBoat(currentBoat + 1);
 
-      if (currentBoat === game.BOAT_SIZES.length - 1) {
+      // TODO rvt 000 : refactor
+      if (currentBoat === game.BOAT_SIZES.length - 1 && !boardsAreInitialized) {
+        const playerC = game.currentPlayer;
+        const go = playerC !== playerFinished && playerFinished !== -1;
+        setPlayerFinished(game.currentPlayer);
+
         game.nextPlayer();
         setGrid(game.grids[game.currentPlayer]);
-        setCurrentBoat(game.BOAT_SIZES);
+        setCurrentBoat(0);
+        if(go){
+          setBoardsAreInitialized(true);
+        }
       }
     }
   };
@@ -122,12 +131,6 @@ export const InitBoatsGrid = (game: Game) => {
           </Grid>
         </Grid>
       </Grid>
-      
-      <Dialog open={open} onClose={() => null} fullScreen>
-        <DialogTitle>Place your boat {game.players[game.currentPlayer]}</DialogTitle>
-        <DialogContent>Be carreful, this is {game.players[game.currentPlayer]} turn!! </DialogContent>
-        <Button variant="contained" color="success" onClick={() => setOpen(false)}>Let's do this!</Button>
-      </Dialog>
     </Grid>
   );
 };
