@@ -8,6 +8,7 @@ import { Grid as GridGame, isValidCoordonates } from '../game/grid.ts';
 import { Coordinates } from '../game/coordinates.ts';
 import { Cell } from './cell.tsx';
 import { computeStyles } from '@popperjs/core/index';
+import { Button } from '@mui/base';
 
 // TODO: refactor: exist in another file
 const range = (start: number, end: number): Array<number> => {
@@ -16,21 +17,26 @@ const range = (start: number, end: number): Array<number> => {
 
 export const InitBoatsGrid = (game: Game) => {
     const [grid, setGrid] = React.useState<GridGame>(game.grids[game.currentPlayer]);
+    const [direction, setDirection] = React.useState<'horizontal' | 'vertical'>('horizontal');
     // const grid = game.grids[game.currentPlayer];
     const rows = range(0, grid.matrix.length);
     const columns = range(0, grid.matrix[0].length);
     const [currentBoat, setCurrentBoat] = React.useState<number>(0);
 
+    useEffect(() => {
+        }, [direction]);
+
     // TODO: handle both directions
     const onClickFunc = (row: number, column: number) => {
-        // debugger;
+        console.log('Current player', game.currentPlayer);
         const boatSize = game.BOAT_SIZES[currentBoat];
-        const boatsCoordinates = Array.from({ length: boatSize }, (_, idx) =>
-            new Coordinates(row + idx, column));
+        const boatsCoordinates = direction === 'vertical' ?
+            Array.from({ length: boatSize }, (_, idx) => new Coordinates(row + idx, column)) :
+            Array.from({ length: boatSize }, (_, idx) => new Coordinates(row, column + idx));
 
-        console.log(boatsCoordinates);
         const areBoatsCoordinatesValid = boatsCoordinates.every((coord) => {
-            return isValidCoordonates(coord) && grid.matrix[coord.row][coord.col] === GridState.Water;
+            return isValidCoordonates(coord) && 
+                grid.matrix[coord.row][coord.col] === GridState.Water;
         });
 
         // TODO: write that the boat is valid or not
@@ -40,13 +46,25 @@ export const InitBoatsGrid = (game: Game) => {
                 setGrid(grid)
             });
             setCurrentBoat(currentBoat + 1);
-            console.log('boat is valid', grid.matrix);
-        } else {
-            console.log('boat is not valid');
+
+            if (currentBoat === game.BOAT_SIZES.length - 1) {
+                game.nextPlayer();
+                setGrid(game.grids[game.currentPlayer]);
+                setCurrentBoat(game.BOAT_SIZES);
+            }
+            // debugger;
         }
     }
 
+    const onClickDirection = () => 
+        setDirection(direction === 'horizontal' ? 'vertical' : 'horizontal');
+
     return (
+        <>
+        <Button onClick={onClickDirection}>
+                {direction}
+        </Button>
+
         <Grid container>
             {rows.map((column) => (
                 <Grid item key={column} >
@@ -70,5 +88,6 @@ export const InitBoatsGrid = (game: Game) => {
                 </Grid>
             ))}
         </Grid>
+        </>
     );
 }

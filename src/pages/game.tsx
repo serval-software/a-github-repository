@@ -11,6 +11,7 @@ export const GamePage = () => {
     const game = new Game([player1, player2]);
 
     return (
+        // TODO: init the board for the second player
         InitBoatsGrid(game)
     )
     // return(
