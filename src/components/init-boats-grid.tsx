@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import { Grid, Typography, Button, Dialog, DialogTitle, DialogContent } from "@mui/material";
-
-import { Game } from "../game/game.ts";
+import { Grid, Typography, Button } from "@mui/material";
 import { GridState } from "../game/grid-state.ts";
 import { Grid as GridGame, isValidCoordonates } from "../game/grid.ts";
 import { Coordinates } from "../game/coordinates.ts";

@@ -15,8 +15,8 @@ export class Grid {
       Array.from({ length: GRID_SIZE }, () => GridState.Water)
     );
     this.hitMap = new Map();
-    this.boatSizes = new Array();
-    this.hitCells = new Array();
+    this.boatSizes = [];
+    this.hitCells = [];
   }
 
   addBoat(coordinates: Array<Coordinates>): boolean {
