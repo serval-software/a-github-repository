@@ -28,7 +28,6 @@ export const InitBoatsGrid = (game: Game) => {
 
   // TODO: handle both directions
   const onClickFunc = (row: number, column: number) => {
-    console.log("Current player", game.currentPlayer);
     const boatSize = game.BOAT_SIZES[currentBoat];
     const boatsCoordinates =
       direction === "vertical"
@@ -68,7 +67,6 @@ export const InitBoatsGrid = (game: Game) => {
     setDirection(direction === "horizontal" ? "vertical" : "horizontal");
 
   const onMouseOver = (row: number, column: number) => {
-    console.log("mouse over", row, column);
     const boatSize = game.BOAT_SIZES[currentBoat];
 
     const preview = Array.from({ length: boatSize }, (_, idx) =>

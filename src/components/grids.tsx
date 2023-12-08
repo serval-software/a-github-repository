@@ -1,7 +1,6 @@
 import { Grid, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import { GridComponent } from "../components/grid-component.tsx";
-import { GridState } from "../game/grid-state.ts";
 
 export const GridCoupleDisplay = (props) => {
   const { currentGrid, currentVisible, ennemyGrid, ennemyVisible } = props;

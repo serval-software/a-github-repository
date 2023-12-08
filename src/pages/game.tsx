@@ -1,17 +1,15 @@
+import React from "react";
 import { useLocation } from "react-router-dom";
-import { GridCoupleDisplay } from "../components/grids.tsx";
 import { InitBoatsGrid } from "../components/init-boats-grid.tsx";
 import { Game } from "../game/game.ts";
-import { initVisibleGrid, GRID_SIZE } from "../game/grid.ts";
-import { Coordinates } from "../game/coordinates.ts";
 
 export const GamePage = () => {
     const location = useLocation();
     const {player1, player2} = location.state.players;
-    const game = new Game([player1, player2]);
+    const [game, _] = React.useState<Game>(() => new Game([player1, player2]));
+    
 
     return (
-        // TODO: init the board for the second player
         InitBoatsGrid(game)
     )
     // return(

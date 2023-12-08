@@ -11,8 +11,8 @@ export class Grid {
   hitCells!: Array<Coordinates>;
 
   constructor() {
-    this.matrix = Array.from({length: GRID_SIZE}, () => 
-      Array.from({ length: GRID_SIZE}, () => GridState.Water)
+    this.matrix = Array.from({ length: GRID_SIZE }, () =>
+      Array.from({ length: GRID_SIZE }, () => GridState.Water)
     );
     this.hitMap = new Map();
     this.boatSizes = new Array();
@@ -23,8 +23,7 @@ export class Grid {
     const result = coordinates.every((coord) => {
       const { row, col } = coord;
       return (
-        isValidCoordonates(coord) &&
-        this.matrix[row][col] === GridState.Water
+        isValidCoordonates(coord) && this.matrix[row][col] === GridState.Water
       );
     });
 
@@ -59,21 +58,25 @@ export class Grid {
   }
 }
 
-export const initVisibleGrid = (cellHit: Array<Coordinates>): Array<Array<boolean>> => {
-    let result = Array.from({length: GRID_SIZE}, () => 
-      Array.from({ length: GRID_SIZE}, () => false)
-    );
+export const initVisibleGrid = (
+  cellHit: Array<Coordinates>
+): Array<Array<boolean>> => {
+  let result = Array.from({ length: GRID_SIZE }, () =>
+    Array.from({ length: GRID_SIZE }, () => false)
+  );
 
-    cellHit.forEach((coord) => {
-        result[coord.row][coord.col] = true;
-    });
+  cellHit.forEach((coord) => {
+    result[coord.row][coord.col] = true;
+  });
 
-    return result;
-}
+  return result;
+};
 
 export const isValidCoordonates = (coord: Coordinates): boolean => {
-    return coord.row >= 0 &&
-        coord.row < GRID_SIZE &&
-        coord.col >= 0 &&
-        coord.col < GRID_SIZE;
-}
+  return (
+    coord.row >= 0 &&
+    coord.row < GRID_SIZE &&
+    coord.col >= 0 &&
+    coord.col < GRID_SIZE
+  );
+};
