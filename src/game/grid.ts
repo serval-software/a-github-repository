@@ -61,3 +61,15 @@ export class Grid {
       : HitState.Hit;
   }
 }
+
+export const initVisibleGrid = (cellHit: Array<Coordinates>): Array<Array<boolean>> => {
+    let result = Array.from({length: GRID_SIZE}, () => 
+      Array.from({ length: GRID_SIZE}, () => false)
+    );
+
+    cellHit.forEach((coord) => {
+        result[coord.row][coord.col] = true;
+    });
+
+    return result;
+}
