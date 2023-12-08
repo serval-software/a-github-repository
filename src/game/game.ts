@@ -16,4 +16,9 @@ export class Game {
     initBoat(currentPlayer: number, currentBoat: number, coordinates: Array<Coordinates>): boolean {
         return coordinates.length === this.BOAT_SIZES[currentBoat] && this.grids[currentPlayer].addBoat(coordinates);
     }
+
+
+    nextPlayer(): number {
+        return this.currentPlayer = (this.currentPlayer + 1) % this.players.length;
+    }
 }
