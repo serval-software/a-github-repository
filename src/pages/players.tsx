@@ -20,6 +20,18 @@ export const PlayersPage = () => {
   const [player1, setPlayer1] = React.useState("");
   const [player2, setPlayer2] = React.useState("");
 
+  const handleKeyPress = (event, finish) => {
+    console.log(event.key)
+    if (event.key === "Enter") {
+      if(!finish && player1 !== "") {
+        setCurrentPlayer(2);
+      }
+      else if (finish && (player2 === "" || player2 !== player1)){
+        startGame();
+      }
+    }
+  };
+
   const displayPseudoInput = () => {
     return (
       <Grid
@@ -38,6 +50,7 @@ export const PlayersPage = () => {
             onChange={(event) => {
               setPlayer1(event.target.value);
             }}
+            onKeyDown={(event) => handleKeyPress(event, false)}
           />
         </Grid>
         <Grid item>
@@ -49,6 +62,7 @@ export const PlayersPage = () => {
               onChange={(event) => {
                 setPlayer2(event.target.value);
               }}
+              onKeyDown={(event) => handleKeyPress(event, true)}
             />
           )}
         </Grid>
