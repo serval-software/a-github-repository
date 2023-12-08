@@ -8,7 +8,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Container, color } from "@mui/system";
+import { Container } from "@mui/system";
+import GamesIcon from "@mui/icons-material/Games";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import CheckIcon from '@mui/icons-material/Check';
+import RowingIcon from '@mui/icons-material/Rowing';
 import { useNavigate } from "react-router-dom";
 
 export const PlayersPage = () => {
@@ -68,8 +72,9 @@ export const PlayersPage = () => {
         <Grid
           container
           direction="column"
-          justifyContent="space-evenly"
+          justifyContent="space-between"
           alignItems="center"
+          style={{ height: 'inherit' }}
         >
           <Grid item>
             <Grid
@@ -91,46 +96,57 @@ export const PlayersPage = () => {
               <Button
                 variant="contained"
                 color="primary"
+                size="large"
                 onClick={() => setShowPopup(true)}
               >
-                Start game
+                Start! &nbsp;
+                <GamesIcon />
               </Button>
             </Grid>
+          </Grid>
+          <Grid item>
+            <RowingIcon style={{ fontSize: '500%' }} color="primary" />
           </Grid>
         </Grid>
       </Card>
 
       <Dialog open={showPopup} onClose={() => setShowPopup(false)}>
-        <DialogTitle>Enter players pseudos :</DialogTitle>
-        <Grid
+        <Grid container direction="column" spacing={2}>
+            <Grid item>
+                <DialogTitle>Enter players pseudos :</DialogTitle>
+            </Grid>
+            <Grid item>
+            <Grid
           container
           direction="column"
           justifyContent="center"
           alignItems="center"
-          spacing={3}
+          spacing={4}
         >
           <Grid item>{displayPseudoInput()}</Grid>
           <Grid item>
             {currentPlayer === 2 ? (
               <Button
                 variant="contained"
-                color="primary"
+                color="success"
                 onClick={() => startGame()}
-                disabled={player2 === ""}
+                disabled={player2 === "" || player2 === player1}
               >
-                Validate
+                <CheckIcon />
               </Button>
             ) : (
               <Button
                 variant="contained"
-                color="primary"
+                color="secondary"
                 disabled={player1 === ""}
                 onClick={() => setCurrentPlayer(2)}
               >
-                Next player
+                <KeyboardDoubleArrowRightIcon />
               </Button>
             )}
           </Grid>
+        </Grid>
+            </Grid>
         </Grid>
       </Dialog>
     </Container>
