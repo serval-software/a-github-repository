@@ -1,5 +1,5 @@
-import { Coordinates } from "./coordinates";
-import { Grid } from "./grid";
+import { Coordinates } from "./coordinates.ts";
+import { Grid } from "./grid.ts";
 
 export class Game {
     players: Array<string>;

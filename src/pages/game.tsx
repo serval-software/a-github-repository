@@ -1,10 +1,12 @@
-import React from "react";
-import { GridCoupleDisplay } from "../components/grids";
-import { Game } from "../game/game";
-import { initVisibleGrid } from "../game/grid";
+import { useLocation } from "react-router-dom";
+import { GridCoupleDisplay } from "../components/grids.tsx";
+import { Game } from "../game/game.ts";
+import { initVisibleGrid } from "../game/grid.ts";
 
-export const GamePage = ({ player1Name, player2Name }) => {
-    const game = new Game([player1Name, player2Name]);
+export const GamePage = () => {
+    const location = useLocation();
+    const {player1, player2} = location.state.players;
+    const game = new Game([player1, player2]);
 
     return (
         GridCoupleDisplay({

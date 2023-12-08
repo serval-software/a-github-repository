@@ -60,10 +60,7 @@ export const PlayersPage = () => {
 
   const startGame = () => {
     setShowPopup(false);
-
     navigate("/game", { state: { players: { player1, player2 } } });
-
-    // TODO 000 : start game with players pseudos
   };
 
   return (

@@ -1,5 +1,4 @@
 import React from "react";
-import { Grid as GameGrid } from "../game/grid";
 import { Grid } from "@mui/material";
 
 const range = (start: number, end: number): Array<number> => {
