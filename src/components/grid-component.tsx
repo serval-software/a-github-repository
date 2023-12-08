@@ -24,7 +24,7 @@ export const GridComponent = (props) => {
               key={`${row} ${column}`}
               cellType={displayMatrix(row, column)}
               onClick={null}
-              mouseOver={null}
+              mouseOver={() => null}
               borderColor="black"
             ></Cell>
           ))}

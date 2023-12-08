@@ -35,7 +35,7 @@ export const Cell = ({ cellType, onClick, mouseOver, borderColor }) => {
             borderColor: borderColor,
           }}
         >
-          <Typography> {GridState[cellType][0] ?? cellType[0]} </Typography>
+          <Typography> {GridState[cellType] ? GridState[cellType[0]] : cellType[0]} </Typography>
         </div>
       </Grid>
     </Grid>

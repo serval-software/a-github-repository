@@ -12,7 +12,7 @@ const range = (start: number, end: number): Array<number> => {
   return Array.from({ length: end - start }, (_, index) => start + index);
 };
 
-export const InitBoatsGrid = (game: Game) => {
+export const InitBoatsGrid = (game: Game, boardsAreInitialized: boolean, setBoardsAreInitialized) => {
   const [grid, setGrid] = React.useState<GridGame>(
     game.grids[game.currentPlayer]
   );
@@ -55,10 +55,11 @@ export const InitBoatsGrid = (game: Game) => {
       });
       setCurrentBoat(currentBoat + 1);
 
-      if (currentBoat === game.BOAT_SIZES.length - 1) {
+      if (currentBoat === game.BOAT_SIZES.length - 1 && !boardsAreInitialized) {
         game.nextPlayer();
         setGrid(game.grids[game.currentPlayer]);
-        setCurrentBoat(game.BOAT_SIZES);
+        setCurrentBoat(0);
+        setBoardsAreInitialized(true);
       }
     }
   };
