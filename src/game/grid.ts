@@ -23,10 +23,7 @@ export class Grid {
     const result = coordinates.every((coord) => {
       const { row, col } = coord;
       return (
-        row >= 0 &&
-        row < GRID_SIZE &&
-        col >= 0 &&
-        col < GRID_SIZE &&
+        isValidCoordonates(coord) &&
         this.matrix[row][col] === GridState.Water
       );
     });
@@ -72,4 +69,11 @@ export const initVisibleGrid = (cellHit: Array<Coordinates>): Array<Array<boolea
     });
 
     return result;
+}
+
+export const isValidCoordonates = (coord: Coordinates): boolean => {
+    return coord.row >= 0 &&
+        coord.row < GRID_SIZE &&
+        coord.col >= 0 &&
+        coord.col < GRID_SIZE;
 }
